@@ -38,11 +38,7 @@ public class VentaImpl implements VentaServicio {
 
     @Override
     public void eliminarVenta(int id) {
-        Venta venta = this.repositoryVenta.encontrarporId(id);
-
-        if (venta != null){
-            this.repositoryVenta.save(venta);
-        }
+        repositoryVenta.deleteById(id);
 
     }
 }

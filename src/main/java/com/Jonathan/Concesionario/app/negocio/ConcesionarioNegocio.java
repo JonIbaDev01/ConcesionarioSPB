@@ -7,10 +7,18 @@ import com.Jonathan.Concesionario.app.entity.Concesionario;
 import com.Jonathan.Concesionario.app.implementacion.ClienteImpl;
 import com.Jonathan.Concesionario.app.implementacion.ConcesionarioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Component
 public class ConcesionarioNegocio {
     @Autowired

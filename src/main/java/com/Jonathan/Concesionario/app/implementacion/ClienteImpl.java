@@ -39,11 +39,8 @@ public class ClienteImpl implements ClienteServicio {
 
     @Override
     public void eliminarCliente(int id) {
-        Cliente cliente = this.repositoryCliente.encontrarporId(id);
+        repositoryCliente.deleteById(id);
 
-        if (cliente != null){
-            this.repositoryCliente.save(cliente);
-        }
 
     }
 }

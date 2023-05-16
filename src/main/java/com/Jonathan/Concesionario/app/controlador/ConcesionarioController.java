@@ -3,6 +3,7 @@ package com.Jonathan.Concesionario.app.controlador;
 
 import com.Jonathan.Concesionario.app.dto.ConcesionarioDto;
 import com.Jonathan.Concesionario.app.negocio.ConcesionarioNegocio;
+import com.Jonathan.Concesionario.app.servicio.ConcesionarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ import java.util.Map;
 public class ConcesionarioController {
     @Autowired
     private ConcesionarioNegocio concesionarioNegocio;
+
+    @Autowired
+    private ConcesionarioServicio concesionarioServicio;
 
 
     @GetMapping("/all")
@@ -62,6 +66,17 @@ public class ConcesionarioController {
         String resp = this.concesionarioNegocio.guardarConcesionario(concesionarioDto);
         res.put("status","ok");
         res.put("data",resp);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> eliminarConcesionario (@PathVariable int id ){
+        Map<String,Object> res=new HashMap<>();
+
+        concesionarioServicio.eliminarConcesionario(id);
+
+        res.put("status","El concesionario ha sido eliminado");
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

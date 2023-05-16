@@ -6,6 +6,7 @@ import com.Jonathan.Concesionario.app.entity.Empleado;
 import com.Jonathan.Concesionario.app.implementacion.EmpleadoImpl;
 import com.Jonathan.Concesionario.app.negocio.ClienteNegocio;
 import com.Jonathan.Concesionario.app.negocio.EmpleadoNegocio;
+import com.Jonathan.Concesionario.app.servicio.EmpleadoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ import java.util.Map;
 public class EmpleadoController {
     @Autowired
     private EmpleadoNegocio empleadoNegocio;
+
+    @Autowired
+    private EmpleadoServicio empleadoServicio;
 
 
     @GetMapping("/all")
@@ -68,6 +72,17 @@ public class EmpleadoController {
         String resp = this.empleadoNegocio.guardarEmpleado(empleadoDto);
         res.put("status","ok");
         res.put("data",resp);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> eliminarEmpleado (@PathVariable int id ){
+        Map<String,Object> res=new HashMap<>();
+
+        empleadoServicio.eliminarEmpleado(id);
+
+        res.put("status","El empleado ha sido eliminado");
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

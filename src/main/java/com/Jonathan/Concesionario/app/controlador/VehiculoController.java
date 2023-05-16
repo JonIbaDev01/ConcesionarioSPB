@@ -2,6 +2,7 @@ package com.Jonathan.Concesionario.app.controlador;
 
 import com.Jonathan.Concesionario.app.dto.VehiculoDto;
 import com.Jonathan.Concesionario.app.negocio.VehiculoNegocio;
+import com.Jonathan.Concesionario.app.servicio.VehiculoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class VehiculoController {
 
     @Autowired
     private VehiculoNegocio vehiculoNegocio;
+
+    @Autowired
+    private VehiculoServicio vehiculoServicio;
 
     @GetMapping("/all")
     @ResponseBody
@@ -71,6 +75,17 @@ public class VehiculoController {
         String resp = this.vehiculoNegocio.guardarVehiculo(vehiculoDto);
         res.put("status","ok");
         res.put("data",resp);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> eliminarVehiculo (@PathVariable int id ){
+        Map<String,Object> res=new HashMap<>();
+
+        vehiculoServicio.eliminarVehiculo(id);
+
+        res.put("status","El vehiculo ha sido eliminado");
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

@@ -39,11 +39,7 @@ public class VehiculoImpl implements VehiculoServicio {
 
     @Override
     public void eliminarVehiculo(int id) {
-        Vehiculo vehiculo = this.repositoryVehiculo.encontrarporId(id);
-
-        if (vehiculo != null){
-            this.repositoryVehiculo.save(vehiculo);
-        }
+        repositoryVehiculo.deleteById(id);
 
     }
 }

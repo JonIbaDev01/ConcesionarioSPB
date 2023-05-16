@@ -35,6 +35,5 @@ public class ConcesionarioImpl implements ConcesionarioServicio {
 
     @Override
     public void eliminarConcesionario(int id) {
-
-    }
+        repositoryConcesionario.deleteById(id);    }
 }
