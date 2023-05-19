@@ -99,7 +99,7 @@ public class VentaController {
 
         }catch(Exception e){
             res.put("status",HttpStatus.INTERNAL_SERVER_ERROR);
-            res.put("code","500");
+            res.put("code","500" );
             res.put("data",e.getMessage());
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
